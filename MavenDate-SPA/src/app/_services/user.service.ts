@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { environment } from 'src/environments/environment';
+import { idLocale } from 'ngx-bootstrap';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -26,5 +27,9 @@ getUsers(): Observable<User[]> {
 getUser(id): Observable<User> {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
   // return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
+}
+
+updateUser(id: number, user: User) {
+  return this.http.put(this.baseUrl + 'users/' + id, user);
 }
 }
