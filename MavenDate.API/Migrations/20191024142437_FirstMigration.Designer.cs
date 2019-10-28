@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MavenDate.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191017133034_ExtendedUserClass")]
-    partial class ExtendedUserClass
+    [Migration("20191024142437_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace MavenDate.API.Migrations
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsMain");
+
+                    b.Property<string>("PublicId");
 
                     b.Property<string>("Url");
 
