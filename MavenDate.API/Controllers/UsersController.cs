@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MavenDate.API.Data;
 using MavenDate.API.Dtos;
+using MavenDate.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MavenDate.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
