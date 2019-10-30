@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DatingApp.API.Models;
 using MavenDate.API.Helpers;
 using MavenDate.API.Models;
 
@@ -18,5 +19,6 @@ namespace MavenDate.API.Data
          Task<User> GetUser(int id);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhtoForUser(int userId);
+         Task<Like> GetLike(int userId, int recipentId);
     }
 }

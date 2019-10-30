@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using DatingApp.API.Models;
 using MavenDate.API.Data;
 using MavenDate.API.Dtos;
 using MavenDate.API.Helpers;
@@ -85,6 +86,39 @@ namespace MavenDate.API.Controllers
             return NoContent();
 
             throw new System.Exception($"Updating user {id} failed to save");
+        }
+
+        [HttpPost("{id}/like/{recipentId}")]
+
+        public async Task<IActionResult> LikeUser(int id, int recipentId)
+        {
+
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var like = await _repo.GetLike(id, recipentId);
+
+            if (like !=null)
+            return BadRequest("You already like this user");
+
+            if (await _repo.GetUser(recipentId) == null)
+                return NotFound();
+
+             if ( recipentId == id)
+                return BadRequest("Sorry you can't like your own profile");
+
+                like = new Like
+                {
+                    LikerId = id,
+                    LikeeId = recipentId
+                };
+
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+            return Ok();
+
+         return BadRequest("Failed to like user");       
         }
     }
 }
