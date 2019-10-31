@@ -20,5 +20,8 @@ namespace MavenDate.API.Data
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhtoForUser(int userId);
          Task<Like> GetLike(int userId, int recipentId);
+         Task<Message> GetMessage(int id);
+         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
+         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipentId);
     }
 }
